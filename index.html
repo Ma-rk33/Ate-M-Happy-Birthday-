@@ -12,6 +12,8 @@
 
 </head>
 <body>
+  <div class="stage" id="stage">
+
 
   <div class="frame"> <img src="Background.jpeg" alt="Stars background"> </div>
 
@@ -61,7 +63,7 @@
 
   <!-- ============ MEMORIES PAGE ============ -->
   <div class="memoriespage">
-        <img class="Flower1" src=".png">
+        <img class="Flower1" src="FLower Side 1.png">
     <img class="Flower2" src="Flower Side 2.png">
     <img class="Ribbon1" src="Ribbon Side 1.png">
     <img class="Ribbon2" src="Ribbon Side 2.png">
@@ -86,7 +88,7 @@
 
   <!-- ============ LETTERS PAGE ============ -->
   <div class="letterspage">
-        <img class="Flower1" src=".png">
+        <img class="Flower1" src="FLower Side 1.png">
     <img class="Flower2" src="Flower Side 2.png">
     <img class="Ribbon1" src="Ribbon Side 1.png">
     <img class="Ribbon2" src="Ribbon Side 2.png">
@@ -113,7 +115,7 @@
 
     <!-- the three letters -->
     <div class="firstlettermiyo">
-          <img class="Flower1" src=".png">
+          <img class="Flower1" src="FLower Side 1.png">
     <img class="Flower2" src="Flower Side 2.png">
     <img class="Ribbon1" src="Ribbon Side 1.png">
     <img class="Ribbon2" src="Ribbon Side 2.png">
@@ -150,7 +152,7 @@ We love you so much.
     </div>
 
     <div class="secondlettermama">
-          <img class="Flower1" src=".png">
+          <img class="Flower1" src="FLower Side 1.png">
     <img class="Flower2" src="Flower Side 2.png">
     <img class="Ribbon1" src="Ribbon Side 1.png">
     <img class="Ribbon2" src="Ribbon Side 2.png">
@@ -171,7 +173,7 @@ We love you so much.
     </div>
 
     <div class="thirdletterjj">
-          <img class="Flower1" src=".png">
+          <img class="Flower1" src="FLower Side 1.png">
     <img class="Flower2" src="Flower Side 2.png">
     <img class="Ribbon1" src="Ribbon Side 1.png">
     <img class="Ribbon2" src="Ribbon Side 2.png">
@@ -224,12 +226,34 @@ Happy birthday ulit, teh! 😽 I hope this will be one of the happiest days of y
     </div>
   </div>
 
+  </div>
+
+   <div class="rotate-hint">Please turn your phone sideways 💜</div>
   <audio id="music" src="Youre Gonna Live Forever in Me.mp3" loop preload="auto"></audio>
 
+  
+
 <script>
-  const cake = document.getElementById("pic");
-  const cat  = document.getElementById("cat");
+  const cake  = document.getElementById("pic");
+  const cat   = document.getElementById("cat");
   const holder = document.querySelector(".hearts");
+  const music = document.getElementById("music");
+  const stage = document.getElementById("stage");
+
+  // ---------- fit the stage to any screen ----------
+  const DESIGN_W = 1536;
+  const DESIGN_H = 730;
+
+  function fitStage() {
+    const s = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H);
+    stage.style.setProperty("--s", s);
+  }
+  fitStage();
+  window.addEventListener("resize", fitStage);
+  window.addEventListener("orientationchange", fitStage);
+
+  // load the other pictures early so they don't flicker
+  ["CAKE 2.png", "CAKE 3.png", "CAT 2.png"].forEach(src => { new Image().src = src; });
 
   // the two cake pictures that swap back and forth
   const images = ["CAKE 1.png", "CAKE 2.png"];
@@ -241,12 +265,8 @@ Happy birthday ulit, teh! 😽 I hope this will be one of the happiest days of y
   }, 1000);
 
   // make the hearts
-  const heartFiles = [
-    "heart up 1.png",
-    "heart up 2.png",
-    "heart up 3.png"
-  ];
-  const COUNT = 50;   // number of hearts, change this
+  const heartFiles = ["heart up 1.png", "heart up 2.png", "heart up 3.png"];
+  const COUNT = 50;
 
   for (let n = 0; n < COUNT; n++) {
     const h = document.createElement("img");
@@ -269,7 +289,6 @@ Happy birthday ulit, teh! 😽 I hope this will be one of the happiest days of y
     flower:   document.querySelector(".flowerpage")
   };
 
-  // hides every page, then shows the one you pass in
   function showPage(page) {
     Object.values(pages).forEach(p => p.classList.remove("show"));
     page.classList.add("show");
@@ -293,18 +312,19 @@ Happy birthday ulit, teh! 😽 I hope this will be one of the happiest days of y
   // when the cake is clicked
   cake.addEventListener("click", () => {
     clearInterval(timer);
-    cake.src = "CAKE 3.png";
-    cat.src  = "CAT 2.png";
-    holder.classList.add("go"); 
-    music.play();                             
+    cake.src = "CAKE 3.png";      // was "/GRRR/CAKE 3.png"
+    cat.src  = "CAT 2.png";       // was "/GRRR/CAT 2.png"
+    holder.classList.add("go");   // starts the hearts
+
     music.volume = 0;
-music.play();
-const fade = setInterval(() => {
-  if (music.volume < 0.6) music.volume = Math.min(0.6, music.volume + 0.05);
-  else clearInterval(fade);
-}, 200);       // new line
-  setTimeout(() => showPage(pages.second), WAIT);
-}, { once: true });                     // starts the hearts
+    music.play().catch(() => {});
+    const fade = setInterval(() => {
+      if (music.volume < 0.6) music.volume = Math.min(0.6, music.volume + 0.05);
+      else clearInterval(fade);
+    }, 200);
+
+    setTimeout(() => showPage(pages.second), WAIT);
+  }, { once: true });
    
 
   // the three menu tiles
