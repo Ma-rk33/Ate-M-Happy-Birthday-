@@ -96,6 +96,7 @@ html, body {
   top: 150px;
   left: 450px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  width: 414px;
 }
 
 .firstpage h1 {
@@ -404,7 +405,7 @@ html, body {
 }
 
 .flowerline{
-  width: 5vb;
+  width: 36px;
   height: auto;
   position: fixed;
   left: 100px;
@@ -412,7 +413,7 @@ html, body {
 }
 
 .bottomflower{
-   width: 20vb;
+  width: 146px;
   height: auto;
   position: fixed;
   left: 300px;
@@ -420,7 +421,7 @@ html, body {
 }
 
 .arrowtwinks{
-  width: 40vb;
+  width: 292px;
   height: auto;
   position: fixed;
   left: 20px;
@@ -428,7 +429,7 @@ html, body {
 }
 
 .CLEOME1 {
-  width: 40vb;
+  width: 292px;
   height: auto;
   background-color: rgba(85, 0, 67, 0.722);
   border-radius: 10px;
@@ -708,7 +709,7 @@ html, body {
 .Miyos,
 .Mamas,
 .Jays {
-  width: 40vb;
+  width: 292px;
   height: auto;
   border-radius: 10px;
   position: relative;
