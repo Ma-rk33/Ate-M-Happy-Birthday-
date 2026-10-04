@@ -1,5 +1,40 @@
-body {
+html, body {
   margin: 0;
+  height: 100%;
+  overflow: hidden;           /* no scrollbars; the stage handles sizing */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ================= STAGE (scales to any screen) ================= */
+
+.stage {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 1536px;              /* the size the page was designed at */
+  height: 730px;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  transform-origin: center center;
+}
+
+/* phones held upright */
+.rotate-hint {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  background: rgba(60, 0, 80, 0.9);
+  color: #ffd1f5;
+  font-family: "Crimson Text", serif;
+  font-size: 26px;
+}
+
+@media (orientation: portrait) and (max-width: 700px) {
+  .rotate-hint { display: flex; }
 }
 
 /* background, fixed so it stays while scrolling */
